@@ -270,6 +270,9 @@
                     <a class="carousel-control-next" href="#mycarousel" role="button" data-slide="next">
                         <span class="carousel-control-next-icon"></span>
                     </a>
+                        <button class="btn btn-danger bt-sm" id="carouselButton">
+                            <span class="fa fa-pause"></span>
+                        </button>
 
                 </div>
             </div>
@@ -336,6 +339,25 @@
   trigger: 'focus'
 })
     </script>
+<script>
+    $(document).ready(function(){
+        $("#mycarousel").carousel({interval:2000});
+        $("#carouselButton").click(function(){
+            console.log('test')
+            if ($("#carouselButton").children('span').hasClass('fa-pause')){
+                $("#mycarousel").carousel('pause');
+                $("#carouselButton").children("span").removeClass('fa-pause');
+                $("#carouselButton").children("span").addClass('fa-play');
+            }
+            else if ($("#carouselButton").children("span").hasClass('fa-play')){
+                $("#mycarousel").carousel('cycle');
+                $("#carouselButton").children("span").removeClass('fa-play');
+                $("#carouselButton").children("span").addClass('fa-pause');
+            }
+
+        });
+    })
+</script>
 </body>
 
 </html>
