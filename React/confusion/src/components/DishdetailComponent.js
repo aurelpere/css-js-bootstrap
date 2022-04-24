@@ -35,15 +35,14 @@ class Dishdetail extends Component {
               <p key={comment.id} className="text-start">
                   {comment.comment}
                   <br/><br/>
-                  -- {comment.author}, {comment.date}
+                  -- {comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}
                   <br/><br/>
               </p>
             );});
             return(
             <div className="container">
-                <p className="text-start">
-                <h4>Comments</h4>
-            </p>
+                <h4 className="text-start">Comments</h4>
+
                 {comments}
             </div>
         );
