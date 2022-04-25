@@ -52,12 +52,14 @@ import { Card, CardImg,CardImgOverlay,CardText,CardBody,CardTitle } from 'reacts
 
     }
     const Dishdetail = (props) => {
+        console.log(props.dish)
         return(
         <div className="row">
 
             <div className="col-12 col-md-5 m-1">
                 <RenderDish dish={props.dish}/>
             </div>
+
             <div className="col-12 col-md-5 m-1">
                 <RenderComments comments= {props.dish.comments}/>
 

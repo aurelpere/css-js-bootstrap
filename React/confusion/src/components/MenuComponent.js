@@ -12,11 +12,12 @@ import { Card, CardImg,CardImgOverlay,CardText,CardBody,CardTitle } from 'reacts
                     </Card>
             );
     }
-    const Menu = (props) => {
-        const menu = props.dishes.map((dish) => {
+
+    function Menu ({dishes,onClick}) {
+        const menu = dishes.map((dish) => {
             return (
               <div key={dish.id} className="col-12 col-md-5 m-1">
-                <RenderMenuItem dish={dish} onClick={props.onClick}/>
+                <RenderMenuItem dish={dish} onClick={onClick(dish.id)}/>
               </div>
             );
         });
@@ -30,8 +31,5 @@ import { Card, CardImg,CardImgOverlay,CardText,CardBody,CardTitle } from 'reacts
         );
 
     }
-
-
-
 
 export default Menu;
