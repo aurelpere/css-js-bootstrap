@@ -7,7 +7,7 @@ import {DISHES} from '../shared/dishes'
 import Dishdetail from './DishdetailComponent';
 import Home from './HomeComponent';
 import Contact from './ContactComponent'
-import {Routes,Route,Navigate} from 'react-router-dom';
+import {Routes,Route,Navigate,useParams} from 'react-router-dom';
 import Header from './HeaderComponent'
 import {COMMENTS} from '../shared/comments';
 import {LEADERS} from '../shared/leaders';
@@ -30,15 +30,26 @@ class Main extends Component {
         />
     );
   }
+  const DishWithId=({match})=>{
+      const { dishId } = useParams()
+      return (
+          <Dishdetail dish={this.state.dishes.filter((dish) => dish.id === parseInt(dishId, 10))[0]}
+                      comments={this.state.comments.filter((comment) => comment.dishId === parseInt(dishId, 10)[0])}/>
+
+      );
+
+    }
+
   return (<div className="App">
     <Header />
       <Routes>
+        <Route exact path='/menu' element={<Menu dishes={this.state.dishes}/> }/>
+        <Route path="/menu/:dishId" element={<DishWithId/>}/>
         <Route path='/home' element={<HomePage/>}/>
         <Route exact path='/contactus' element={<Contact/>}/>
         <Route path='/' element={
             shouldRedirect ? (<Navigate replace to="/home" />) : (<HomePage />)
           }/>
-        <Route exact path='/menu' element={<Menu dishes={this.state.dishes}/> }/>
       </Routes>
 
     <Footer/>
