@@ -2,7 +2,7 @@ import React from 'react';
 import {Breadcrumb,BreadcrumbItem, Card, CardImg,CardImgOverlay,CardText,CardBody,CardTitle } from 'reactstrap';
 import {Link} from 'react-router-dom';
 
-function RenderMenuItem({dish,onClick}){
+function RenderMenuItem({dish}){
             return(
                     <Card>
                     <Link to={`/menu/${dish.id}`}>
@@ -16,7 +16,7 @@ function RenderMenuItem({dish,onClick}){
             );
     }
 
-    function Menu ({dishes,onClick}) {
+    function Menu ({dishes}) {
         const menu = dishes.map((dish) => {
             return (
               <div key={dish.id} className="col-12 col-md-5 m-1">

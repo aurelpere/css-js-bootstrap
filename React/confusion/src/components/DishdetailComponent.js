@@ -52,6 +52,8 @@ import {Link} from 'react-router-dom';
 
     }
     const Dishdetail = (props) => {
+        console.log(props.comments);
+        console.log(props.dish);
         if (props.dish != null) {
             return (
                 <div className="container">
