@@ -1,6 +1,7 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import {Loading} from "./LoadingComponent";
 function RenderLeader(props) {
    return (
     <div className="row">
@@ -19,7 +20,7 @@ function RenderLeader(props) {
 }
 function About(props) {
 
-    const leaders = props.leaders.map((leader) => {
+    const leaders = props.leaders.leaders.map((leader) => {
         console.log(leader);
         return (
             <div key={leader.id} className="col-12 col-md-5 m-1">
@@ -27,8 +28,27 @@ function About(props) {
               </div>
         );
     });
+    if (props.leaders.isLoading){
+            return(
+              <div className="container">
+                  <div className="row">
+                      <Loading/>
+                  </div>
+              </div>
+            );
+        }
+        else if (props.leaders.errMess){
+            return(
+              <div className="container">
+                  <div className="row">
+                      <h4>{props.leaders.errMess}</h4>
+                  </div>
+              </div>
+            );
+        }
 
-    return(
+    else
+        return(
         <div className="container">
             <div className="row">
                 <Breadcrumb>
