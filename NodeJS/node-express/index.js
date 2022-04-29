@@ -4,9 +4,11 @@ const morgan = require('morgan');
 
 const hostname = 'localhost';
 const port = 3000;
+const dishRouter = require('./routes/dishRouter');
+const bodyParser = require('body-parser');
 
 const app = express();
-const bodyParser = require('body-parser');
+app.use('/dishes', dishRouter);
 
 app.use((req, res, next) => {
   console.log(req.headers);
