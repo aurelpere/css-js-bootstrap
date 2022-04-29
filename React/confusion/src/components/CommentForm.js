@@ -33,7 +33,7 @@ class Comment extends Component {
 
     handleSubmit(values){
         this.toggleModal(values);
-        this.props.addComment(this.props.dishId,values.rating,values.author,values.comment);
+        this.props.postComment(this.props.dishId,values.rating,values.author,values.comment);
     }
     render(){
         return(
