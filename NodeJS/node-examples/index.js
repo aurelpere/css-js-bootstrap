@@ -1,13 +1,16 @@
 var rect=require('./rectangle');
 function solveRect(l,b){
     console.log('solving for rectangle with l=' +l +'and b ='+b);
-    if (l<=0 || b<=0){
-        console.log('rectangle dimensions error');
-    }
-    else{
-        console.log('the area is '+rect.area(l,b));
-        console.log('the perimeter is '+rect.perimeter(l,b));
-    }
+    rect(l,b,(err,rectangle)=>{
+       if(err){
+           console.log('error:'+err.message);
+       }
+       else{
+           console.log('the area of l '+l+'and b '+b+'is '+rectangle.area());
+           console.log('the perimeter of l '+l+'and b '+b+'is '+rectangle.perimeter());
+       }
+    });
+    console.log('this statement is after the call to rect')
 }
 
 solveRect(1,2);
