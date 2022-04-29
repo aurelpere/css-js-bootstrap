@@ -2,6 +2,13 @@ import React,{Component} from 'react';
 import {Row, Breadcrumb,BreadcrumbItem,Form,Button,Label,Input,Col} from "reactstrap";
 import {Link} from "react-router-dom";
 import {Control,LocalForm,Errors} from 'react-redux-form';
+
+
+const required=(val)=>val && val.length;
+const maxLength=(len)=>(val)=>!(val)||(val.length<=len)
+const minLength = (len) => (val) => val && (val.length >= len);
+const isNumber = (val) => !isNaN(Number(val));
+const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 class Contact extends Component {
     constructor(props) {
         super(props);
@@ -93,8 +100,16 @@ class Contact extends Component {
                                 <Control.text model=".firstname" id="firstname" name="firstname"
                                        placeholder="first name"
                                               className="form-control"
-                                              />
+                                              validators={{
+                                                  required,minLength:minLength(3),maxLength:maxLength(15)
+                                              }}/>
+                                  <Errors className="text-danger" model=".firstname"
+                                  show="touched"
+                                  messages={{required:'Required',
+                                  minLength:"Must be greater than 2 chars",
+                                  maxLength:"Must be 15 chars max"}}>
 
+                                  </Errors>
                             </Col>
                         </Row>
                          <Row className="form-group">
@@ -102,9 +117,16 @@ class Contact extends Component {
                             <Col md={10}>
                                 <Control.text model=".lastname" className="form-control" id="lastname" name="lastname"
                                        placeholder="last name"
+                                        validators={{
+                                                  required,minLength:minLength(3),maxLength:maxLength(15)
+                                              }}/>
+                                  <Errors className="text-danger" model=".lastname"
+                                  show="touched"
+                                  messages={{required:'Required',
+                                  minLength:"Must be greater than 2 chars",
+                                  maxLength:"Must be 15 chars max"}}>
 
-                                         />
-
+                                  </Errors>
                             </Col>
                         </Row>
                          <Row className="form-group">
@@ -113,25 +135,42 @@ class Contact extends Component {
                                 <Control.text model=".telnum"
                                               className="form-control" type="tel" id="telnum" name="telnum"
                                        placeholder="telnum"
-                                       />
+                                       validators={{
+                                                  required,minLength:minLength(3),maxLength:maxLength(15), isNumber
+                                              }}/>
+                                  <Errors className="text-danger" model=".telnum"
+                                  show="touched"
+                                  messages={{required:'Required',
+                                  minLength:"Must be greater than 2 chars",
+                                  maxLength:"Must be 15 chars max",
+                                  isNumber:"Must be only numbers"}}>
 
+                                  </Errors>
                             </Col>
                         </Row>
                         <Row className="form-group">
                             <Label htmlFor="email" md={2}>Email</Label>
                             <Col md={10}>
                                 <Control.text model=".email" className="form-control" type="email" id="email" name="email"
-                                       placeholder="email"/>
+                                       placeholder="email"
+                                              validators={{
+                                                  required,validEmail
+                                              }}/>
+                                  <Errors className="text-danger" model=".firstname"
+                                  show="touched"
+                                  messages={{required:'Required',
+                                  validEmail:'invalid email adress'
+                                  }}>
 
-
+                                  </Errors>
                             </Col>
                         </Row>
                          <Row className="form-group">
                             <Col md={{size:6,offset:2}}>
                                 <div className="form-check">
                                     <Label check>
-                                        <Control.checkbox model=".agree"  name="agree" 
-                                                          className="check-input"
+                                        <Control.checkbox model=".agree"  name="agree"
+                                                          className="form-check-input"
                                                 />{' '}
                                         <strong>May we contact you?</strong>
                                     </Label>
@@ -139,7 +178,7 @@ class Contact extends Component {
                             </Col>
                              <Col md={{size:3,offset:1}}>
                                 <Control.select model=".contactType" className="form-control" name="contactType"
-                                        onChange={this.handleInputChange}>
+                                        >
                                     <option>Tel.</option>
                                     <option>Email</option>
                                 </Control.select>
